@@ -1,2 +1,2 @@
-# diplomado
-Proyecto temporal para el diplomado
+# coordlib-service
+Microservicio en Java creado com práctica del diplomado
