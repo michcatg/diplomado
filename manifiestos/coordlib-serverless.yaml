@@ -1,0 +1,18 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: coordli-serverless
+spec:
+  template:
+    spec:
+      containers:
+        - image: mitchcatg/proy-m6-coordlib-service:1.0.1
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: 'mongodb://admin:admin123@mongodb:27017/coordlib?authSource=admin'
+              #value: 'mongodb://mongodb:27017/usuario'
+            - name: SPRING_PORT
+              value: '8083'
+
