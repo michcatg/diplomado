@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coodlib-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coordlib-service
+  template:
+    metadata:
+      labels:
+        app: coordlib-service
+    spec:
+      containers:
+        - name: coordlib-service
+          image: mitchcatg/proy-m6-coordlib-service:1.0.1
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: 'mongodb://admin:admin123@mongodb:27017/coordlib?authSource=admin'
+              #value: 'mongodb://mongodb:27017/usuario'
+            - name: SPRING_PORT
+              value: '8081'
