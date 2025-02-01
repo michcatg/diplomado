@@ -8,6 +8,8 @@ WORKDIR /app
 
 COPY target/coordlib-service-0.0.1-SNAPSHOT.jar app.jar
 
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
 # Establece variables de entorno predeterminadas (puedes sobrescribirlas al iniciar el contenedor)
 #ENV SPRING_PROFILES_ACTIVE=prod
 #ENV SPRING_DATA_MONGODB_URI=mongodb://usuario:contraseña@host:puerto/nombre_base_datos

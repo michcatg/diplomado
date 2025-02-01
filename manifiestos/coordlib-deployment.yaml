@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: coordlib-service
-          image: mitchcatg/proy-m6-coordlib-service:1.0.1
+          image: mitchcatg/coordlib-servicem5:v1.0.2
           ports:
             - containerPort: 8081
           env:
