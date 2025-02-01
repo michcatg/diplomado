@@ -1,3 +1,3 @@
 # coordlib-service
 Microservicio en Java creado com práctica del diplomado
-ESTO SE VA A PERDER
+Estos son cambios desde el feat 1 feb
