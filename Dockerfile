@@ -1,5 +1,5 @@
 # Usa una imagen base de OpenJDK con JRE optimizado
-FROM openjdk:17-jdk-slim
+FROM docker.io/openjdk:17-jdk-slim
 
 # Crea un directorio de trabajo en el contenedor
 WORKDIR /app
