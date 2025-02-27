@@ -1,0 +1,56 @@
+#  Primero agregaremos el encabezado de la especificación indicando el nombre, el espacio de trabajo, y una breve descripción
+apiVersion: tekton.dev/v1beta1 
+kind: Pipeline 
+metadata: 
+  name: pipeline-hello-world
+  namespace: diploe2-gvmc
+spec: 
+  description: | 
+    This pipeline is used to demonstrate in an easy way how a Tekton 
+    Pipeline works: 
+    Tasks defined in the pipeline: 
+    - echo: Warm wellcome writing your name 
+    - git-clone: fetching a git repository as the source 
+    - echo: using taskSpec if task does not exist and is not a complex 
+    step
+  #- Luego agregaremos los parámetros que usará nuestra pipeline
+  params: 
+    - name: your-name 
+      type: string 
+    - name: repo-url 
+      type: string 
+  # - Define los espacios de trabajo que se usarán, en nuestro caso solo usaremos un espacio de 
+  # disco temporal, ya que solo lo usamos para clonar el repositorio y no habrá acciones 
+  # posteriores
+  workspaces: 
+    - name: empty-dir
+  # - Definimos las tareas que se ejecutarán en nuestra pipeline
+  tasks: 
+    - name: hello 
+      taskRef: 
+        name: task-echo 
+      params: 
+        - name: message 
+          value: "hello $(params.your-name)" 
+    - name: git-clone 
+      taskRef: 
+        kind: Task 
+        name: git-clone 
+      params: 
+        - name: url 
+          value: $(params.repo-url) 
+      workspaces: 
+        - name: output 
+          workspace: empty-dir 
+    - name: goodbye 
+      runAfter: 
+        - git-clone 
+      taskSpec: 
+      # There are no explicit params defined here. 
+      # They are derived from the TaskRun params above. 
+        steps: 
+          - name: default 
+            image: busybox 
+            script: | 
+              #!/bin/sh 
+              echo “my first pipeline is done and executed!”
