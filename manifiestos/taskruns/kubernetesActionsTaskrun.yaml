@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1 
+kind: TaskRun 
+metadata:
+  generateName: kubernetes-actions- 
+  namespace: diploe2-gvmc
+spec: 
+  serviceAccountName: tekton-sa 
+  taskRef: 
+    name: kubernetes-actions 
+  params: 
+    - name: script 
+      value: | 
+        kubectl delete deployment gvmc-coordlib-deployment 
+        kubectl create deployment gvmc-coordlib-deployment --image=docker.io/mitchcatg/coordlib-servicem5:v1.0.5
+        echo "----------" 
+        kubectl get deployment 
+  workspaces: 
+    - name: kubeconfig-dir 
+      emptyDir: {} 
+    - name: manifest-dir 
+      emptyDir: {} 
