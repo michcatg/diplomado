@@ -18,4 +18,4 @@ El flujo de trabajo par el desarrollo organizado y colaborativo del presente pro
 * hotfix/arreglo
   * Corrige errores de main y se crea desde main
 
-Cambios 8 para probar el listener
+> Verificación de mi CI/CD desde mi repositorio `michcatg/diplomado` en github
