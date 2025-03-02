@@ -9,7 +9,7 @@ Si se desea ejecutar los tasksruns de forma independiente, se pueden seguir los 
 ### Clonación del código fuente de la aplicación
 El primer paso para crear la imagen de la aplicación Java es clonar el código fuente de la aplicación. Para ello:
 * Debes de asegurarte de que el Task de git-clone ya se encuentra en el cluster de Kubernetes. Si no es así, debes de crearlo.
-* Debes de crear el taskrun que utilice el task de git-clone. Para ello, debes de crear el taskrun definido en el archivo [taskrun-git-clone.yaml](taskruns/taskrun-git-clone.yaml). Para crear el taskrun, ejecuta el siguiente comando:
+* Debes de crear el taskrun que utilice el task de git-clone. Para ello, debes de crear el taskrun definido en el archivo [taskrun-git-clone.yaml](tekton/taskruns/taskrun-git-clone.yaml). Para crear el taskrun, ejecuta el siguiente comando:
 
 ```bash
 kubectl create -f taskrun-git-clone.yaml
@@ -28,7 +28,7 @@ kubectl logs git-clone-[xxx]
 Es posible comprobar que el código fuente ha sido clonado con éxito, ejecutando el taskrun de listDirectory
  Para ello:
 * Debes de asegurarte de que el Task de list-directory ya se encuentra en el cluster de Kubernetes. Si no es así, debes de crearlo.
-* Debes de crear el taskrun que utilice el task de list-directory. Para ello, debes de crear el taskrun definido en el archivo [listDirectory.yaml](taskruns/listDirectory.yaml). Para crear el taskrun, ejecuta el siguiente comando:
+* Debes de crear el taskrun que utilice el task de list-directory. Para ello, debes de crear el taskrun definido en el archivo [listDirectory.yaml](tekton/taskruns/listDirectory.yaml). Para crear el taskrun, ejecuta el siguiente comando:
 
 ```bash
 kubectl create -f listDirectory.yaml
@@ -48,7 +48,7 @@ kubectl logs listdirectory-[xxx]
 ### Construcción de la imagen de la aplicación Java
 Una vez que el código fuente ha sido clonado con éxito, el siguiente paso es construir la imagen de la aplicación Java. Para ello:
 * Debes de asegurarte de que el Task de maven ya se encuentra en el cluster de Kubernetes. Si no es así, debes de crearlo.
-* Debes de crear el taskrun que utilice el task de maven. Para ello, debes de crear el taskrun definido en el archivo [mavenTaskrun.yaml](taskruns/mavenTaskrun.yaml). Para crear el taskrun, ejecuta el siguiente comando:
+* Debes de crear el taskrun que utilice el task de maven. Para ello, debes de crear el taskrun definido en el archivo [mavenTaskrun.yaml](tekton/taskruns/mavenTaskrun.yaml). Para crear el taskrun, ejecuta el siguiente comando:
 
 ```bash
 kubectl create -f maventaskrun.yaml
@@ -66,7 +66,7 @@ kubectl logs maven-[xxx]
 ### Push de la imagen de la aplicación Java al registro de imágenes
 Una vez que la imagen de la aplicación Java ha sido construida con éxito, el siguiente paso es subir la imagen al registro de imágenes. Para ello:
 * Debes de asegurarte de que el Task de buildah ya se encuentra en el cluster de Kubernetes. Si no es así, debes de crearlo.
-* Debes de crear el taskrun que utilice el task de buildah. Para ello, debes de crear el taskrun definido en el archivo [buildhaTaskrun.yaml](taskruns/buildhaTaskrun.yaml). No olvides cambiar la versión de la imagen en el archivo [buildhaTaskrun.yaml](taskruns/buildhaTaskrun.yaml) antes de crear el taskrun. Para crear el taskrun, ejecuta el siguiente comando:
+* Debes de crear el taskrun que utilice el task de buildah. Para ello, debes de crear el taskrun definido en el archivo [buildhaTaskrun.yaml](tekton/taskruns/buildhaTaskrun.yaml). No olvides cambiar la versión de la imagen en el archivo [buildhaTaskrun.yaml](tekton/taskruns/buildhaTaskrun.yaml) antes de crear el taskrun. Para crear el taskrun, ejecuta el siguiente comando:
 
 ```bash
 kubectl create -f buildhaTaskrun.yaml
@@ -84,7 +84,7 @@ kubectl logs buildah-[xxx]
 ### Despliegue de la aplicación Java en el cluster de Kubernetes
 Una vez que la imagen de la aplicación Java ha sido subida al registro de imágenes, el siguiente paso es desplegar la aplicación en el cluster de Kubernetes. Para ello:
 * Debes de asegurarte de que el Task de kubernetes-actions ya se encuentra en el cluster de Kubernetes. Si no es así, debes de crearlo.
-* Debemos de crear el taskrun que utilice el task de kubernetes-actions. Para ello, debes de crear el taskrun definido en el archivo [deployKubernetesActionsTaskrun.yaml](taskruns/deployKubernetesActionsTaskrun.yaml). Para crear el taskrun, ejecuta el siguiente comando:
+* Debemos de crear el taskrun que utilice el task de kubernetes-actions. Para ello, debes de crear el taskrun definido en el archivo [deployKubernetesActionsTaskrun.yaml](tekton/taskruns/deployKubernetesActionsTaskrun.yaml). Para crear el taskrun, ejecuta el siguiente comando:
 
 ```bash
 kubectl create -f deployKubernetesActionsTaskrun.yaml
