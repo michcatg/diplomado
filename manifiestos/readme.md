@@ -122,3 +122,11 @@ tkn pipelinerun logs pipelinerun-cicd-[xxx]
 Dado que mi cli de tkn no muestra la salida de los logs, se muestra la salida, se muestran los resultados de consultar todos los logs de cada taskrun creada.
 
 ![Taskruns Log](images/CICDV2LogPR.png)
+
+El despliegue del servicio en OpenShift/Kubernetes se llevará a cabo al integrar cambios en la rama `main`. Esto se logró mediante un hook de GitHub que desencadena la ejecución del pipeline en Tekton que se acaba de describir.
+
+![GitHub Hook](images/githubConfig.png)
+
+A continuación se muestra una imagen del último Delivery que se registró en GitHub al integrar cambios en la rama `main`.
+
+![GitHub Hook](images/githubDelivery.png)
