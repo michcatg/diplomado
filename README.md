@@ -39,7 +39,7 @@ El flujo de trabajo par el desarrollo organizado y colaborativo del presente pro
   * Corrige errores de main y se crea desde main
 
 ## Despliegue
-El proceso de despliegue en Kubernetes está documentado en el archivo [manifiestos/readme.md](manifiestos/readme.md). Este documento contiene instrucciones detalladas sobre cómo desplegar el servicio utilizando los manifiestos de Kubernetes y el pipeline de Tekton.
+El proceso de despliegue en Kubernetes está documentado en el archivo [manifiestos/readme.md](https://github.com/michcatg/diplomado/tree/main/manifiestos). Este documento contiene instrucciones detalladas sobre cómo desplegar el servicio utilizando los manifiestos de Kubernetes y el pipeline de Tekton.
 
 ## Interacción con el Microservicio
 En esta sección se describe cómo interactuar con el microservicio CoordLib Service, incluyendo un diagrama que ilustra la arquitectura básica y el flujo de información cuando se realiza una solicitud de usuario. También se detallan los endpoints disponibles y cómo utilizarlos.
