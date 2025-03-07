@@ -1,0 +1,49 @@
+apiVersion: tekton.dev/v1beta1 
+kind: Pipeline 
+metadata: 
+  name: pipeline-clone-package
+  namespace: diploe2-gvmc
+spec: 
+  description: |
+    Este pipeline sirve para clonar un repositorio git
+    y empaquetar una aplicación Java
+  params: 
+    - name: repo-url 
+      type: string 
+    - name: maven-image 
+      type: string
+  workspaces: 
+    - name: workspace 
+    - name: maven-settings
+  tasks:
+    - name: fetch-repository 
+      taskRef: 
+        kind: Task 
+        name: git-clone 
+      params: 
+        - name: url   # <- this is the git-clone param  
+          value: $(params.repo-url)   # <- a reference to param 
+        - name: deleteExisting 
+          value: "true"
+      workspaces:
+        - name: output # <- should be the same as the git-clone task 
+          workspace: workspace # <- the workspace defined up 
+    - name: maven
+      taskRef:
+        name: maven
+      runAfter:
+        - fetch-repository
+      params:
+        - name: GOALS 
+          value: 
+            - -B 
+            - -DskipTests 
+            - clean 
+            - package 
+        - name: MAVEN_IMAGE 
+          value: $(params.maven-image)  # <- same parameter as up 
+      workspaces:
+        - name: maven-settings 
+          workspace: maven-settings 
+        - name: source  # <- name of the workspace expected by the Task 
+          workspace: workspace 

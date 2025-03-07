@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1 
+kind: PipelineRun 
+metadata: 
+  generateName: pipelinerun-helloworld- 
+  namespace: diploe2-gvmc
+spec: 
+  serviceAccountName: tekton-sa 
+  pipelineRef: 
+    name: pipeline-hello-world 
+  params: 
+    - name: your-name 
+      value: "Michelle Caterine García Velasco" 
+    - name: repo-url 
+      value: https://github.com/michcatg/diplomado.git
+  workspaces: 
+    - name: empty-dir 
+      emptyDir: {} 
